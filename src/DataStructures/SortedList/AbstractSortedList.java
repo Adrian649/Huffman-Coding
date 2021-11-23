@@ -1,4 +1,4 @@
-package DataStructures.SortedList;
+package SortedList;
 
 /**
  * @author Juan O. López

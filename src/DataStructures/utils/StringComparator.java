@@ -1,4 +1,4 @@
-package DataStructures.utils;
+package utils;
 
 public class StringComparator implements Comparator<String> {
 

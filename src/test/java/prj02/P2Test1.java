@@ -8,9 +8,9 @@ import java.text.DecimalFormat;
 import org.junit.Before;
 import org.junit.Test;
 
-import DataStructures.HashTable.*;
-import DataStructures.SortedList.*;
-import DataStructures.Tree.*;
+import HashTable.*;
+import SortedList.*;
+import Tree.*;
 
 public class P2Test1 {
 

@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 
-import DataStructures.HashTable.*;
-import DataStructures.List.*;
-import DataStructures.SortedList.*;
-import DataStructures.Tree.*;
+import HashTable.*;
+import List.*;
+import SortedList.*;
+import Tree.*;
 
 
 /**

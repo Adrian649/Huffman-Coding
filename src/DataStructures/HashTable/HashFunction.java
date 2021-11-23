@@ -1,4 +1,4 @@
-package DataStructures.HashTable;
+package HashTable;
 
 public interface HashFunction<K> {
 

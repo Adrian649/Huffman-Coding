@@ -1,6 +1,6 @@
-package DataStructures.Tree;
+package Tree;
 
-import DataStructures.utils.BinaryTreePrinter.PrintableNode;
+import utils.BinaryTreePrinter.PrintableNode;
 
 /**
  * This class represents a binary tree node with key, value,

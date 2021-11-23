@@ -1,8 +1,8 @@
-package DataStructures.HashTable;
+package HashTable;
 
 import java.io.PrintStream;
 
-import DataStructures.List.List;
+import List.List;
 
 public interface Map<K, V> {
 

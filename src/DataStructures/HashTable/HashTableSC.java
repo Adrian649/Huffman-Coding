@@ -1,9 +1,9 @@
-package DataStructures.HashTable;
+package HashTable;
 
 import java.io.PrintStream;
 
-import DataStructures.List.LinkedList;
-import DataStructures.List.List;
+import List.LinkedList;
+import List.List;
 
 
 public class HashTableSC<K, V> implements Map<K, V> {

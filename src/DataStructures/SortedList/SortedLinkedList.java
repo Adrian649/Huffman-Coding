@@ -1,4 +1,4 @@
-package DataStructures.SortedList;
+package SortedList;
 
 
 /**
@@ -66,43 +66,6 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 		Node<E> newNode = new Node<>(e);
 		Node<E> curNode;
 
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		
-		if (head == null) { //list is empty
-			head = newNode;
-
-		} else if(head.getValue().compareTo(newNode.getValue()) >= 0) { //newNode is smallest value
-			newNode.setNext(head);
-			head = newNode;
-
-		} else {
-			curNode = head;
-			while(curNode.getNext() != null 
-					&& !(newNode.getValue().compareTo(curNode.getNext().getValue()) < 0 
-							&& newNode.getValue().compareTo(curNode.getValue()) >= 0)){
-				//We find where the node has to go in the list other than at the beginning
-				curNode = curNode.getNext();
-			}
-			
-			if (curNode.getNext() == null) { //newNode goes at the end
-				curNode.setNext(newNode);
-				newNode.setNext(null);
-				
-			} else { //newNode goes in between 2 values
-				newNode.setNext(curNode.getNext());
-				curNode.setNext(newNode);
-			}
-		}
-
-
-
-		currentSize++;
-		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
 	}
 
 	@Override
@@ -110,35 +73,6 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 		/* TODO ADD CODE HERE */
 		/* Special case: Be careful when the value is found at the head node */
 		Node<E> rmNode, curNode;
-		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		
-		if(head == null) return false;
-		
-		if(head.getValue() == e) {
-			rmNode = head;
-			head = head.getNext();
-			rmNode.clear();
-			currentSize--;
-			return true;
-		} 
-		
-		for(curNode = head; curNode != null; curNode = curNode.getNext()) {
-			if(curNode.getNext().getValue() == e) {
-				rmNode = curNode.getNext();
-				curNode.setNext(rmNode.getNext());
-				rmNode.clear();
-				currentSize--;
-				return true;
-				
-			}
-		}
-		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
 		
 		return false; //Dummy Return
 	}
@@ -150,35 +84,6 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 		Node<E> rmNode, curNode;
 		E value = null;
 		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		
-		int i = 0;
-		if(index < 0 || index >= size()) throw new IndexOutOfBoundsException();
-		
-		if(size() != 0) {
-			if(index == 0) { //if index == 0, it means were going to remove the head
-				rmNode = head;
-				value = rmNode.getValue();
-				head = head.getNext();
-				rmNode.clear();
-				currentSize--;
-			} else { //if not, we got to remove an element in between 2 elements in the list
-				for(curNode = head; i < index - 1; i++, curNode = curNode.getNext());
-				rmNode = curNode.getNext();
-				value = rmNode.getValue();
-				curNode.setNext(rmNode.getNext());
-				rmNode.clear();
-				currentSize--;
-				
-			}
-		}
-		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		
 		return value; //Dummy Return
 	}
 
@@ -187,24 +92,6 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 		/* TODO ADD CODE HERE */
 		int target = -1;
 		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		int index = 0;
-		Node<E> curNode = head;
-		while(index < size()) {
-			if (curNode.getValue() == e) {
-				target = index;
-				break;
-			} else {
-				curNode = curNode.getNext();
-			}
-			index++;
-		}
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		
 		return target; //Dummy Return
 	}
 
@@ -212,21 +99,7 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 	public E get(int index) {
 		/* TODO ADD CODE HERE */
 		
-		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		
-		if(index < 0 || index >= size()) throw new IndexOutOfBoundsException();
-		Node<E> curNode = head;
-		for (int i = 0; i != index; i++, curNode = curNode.getNext());
-		return curNode.getValue();
-		
-		/******************************************
-		 ** DELETE THESE WHEN UPLOADING TEMPLATE **
-		 ******************************************/
-		
-		//return null; //Dummy Return
+		return null; //Dummy Return
 	}
 
 	

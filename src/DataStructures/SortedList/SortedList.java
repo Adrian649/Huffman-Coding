@@ -1,4 +1,4 @@
-package DataStructures.SortedList;
+package SortedList;
 
 public interface SortedList<E extends Comparable<? super E>> {
 

@@ -1,4 +1,4 @@
-package DataStructures.HashTable;
+package HashTable;
 
 public class SimpleHashFunction<K> implements HashFunction<K> {
 
