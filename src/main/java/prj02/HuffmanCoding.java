@@ -23,7 +23,7 @@ import Tree.*;
  *
  * @author Fernando J. Bermudez Medina (Template)
  * @author A. ElSaid (Review)
- * @author ADD YOUR NAME HERE <ADD STUDENT ID HERE> (Implementation)
+ * @author Adrian Irizarry Negron <802-19-8275> (Implementation)
  * @version 2.0
  * @since 10/16/2021
  */
@@ -98,8 +98,17 @@ public class HuffmanCoding {
 	 */
 	public static Map<String, Integer> compute_fd(String inputString) {
 		/* TODO Compute Symbol Frequency Distribution of each character inside input string */
+		Map<String, Integer> freq = new HashTableSC<String, Integer>(new SimpleHashFunction<>());
+		for (int i = 0; i < inputString.length();i++) {
+			String result = inputString.substring(i,i+1);
+			if (freq.get(result) == null) {
+				freq.put(result,1);
+			}else {
+				freq.put(result,freq.get(result) + 1);
+			}
 
-		return null; //Dummy Return
+		}
+		return freq; //Dummy Return
 	}
 
 	/**
@@ -111,9 +120,10 @@ public class HuffmanCoding {
 	public static BTNode<Integer, String> huffman_tree(Map<String, Integer> fD) {
 
 		/* TODO Construct Huffman Tree */
+		AbstractSortedList<BTNode<String,Integer>> sortedFreq = new SortedLinkedList<BTNode<String,Integer>>();
 		BTNode<Integer,String> rootNode;
 
-		return rootNode; //Dummy Return
+		return null; //Dummy Return
 	}
 
 	/**
