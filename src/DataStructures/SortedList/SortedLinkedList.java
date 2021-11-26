@@ -77,6 +77,7 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 					if (curNode.getNext() != null && curNode.getNext().getValue().compareTo(e) >= 0 ) {
 						newNode.setNext(curNode.getNext());
 						curNode.setNext(newNode);
+						break;
 					}
 					if (curNode.getNext() == null) {
 						curNode.setNext(newNode);
