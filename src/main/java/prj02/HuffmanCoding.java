@@ -120,10 +120,43 @@ public class HuffmanCoding {
 	public static BTNode<Integer, String> huffman_tree(Map<String, Integer> fD) {
 
 		/* TODO Construct Huffman Tree */
-		AbstractSortedList<BTNode<String,Integer>> sortedFreq = new SortedLinkedList<BTNode<String,Integer>>();
-		BTNode<Integer,String> rootNode;
+		SortedList<BTNode<Integer,String>> sortedFreq = new SortedLinkedList<BTNode<Integer,String>>();
+		for (String key : fD.getKeys()) {
+			BTNode<Integer,String> node = new BTNode<Integer,String>(fD.get(key),key);
+			sortedFreq.add(node);
+		}
+		BTNode<Integer,String> temp = new BTNode<Integer,String>();
+		for (int i = 0; i <= sortedFreq.size()-1; i++) {
+			BTNode<Integer,String> newNode = new BTNode<>();
+			newNode.setLeftChild(sortedFreq.removeIndex(0));
+			newNode.setRightChild(sortedFreq.removeIndex(0));
+			newNode.setValue(newNode.getLeftChild().getValue() + newNode.getRightChild().getValue());
+			newNode.setKey(newNode.getLeftChild().getKey() + newNode.getRightChild().getKey());
+			sortedFreq.add(newNode);
+		}
+		while (sortedFreq.size() != 1) {
+			BTNode<Integer,String> newNode = new BTNode<>();
+			newNode.setLeftChild(sortedFreq.removeIndex(0));
+			newNode.setRightChild(sortedFreq.removeIndex(0));
+			newNode.setValue(newNode.getLeftChild().getValue() + newNode.getRightChild().getValue());
+			newNode.setKey(newNode.getLeftChild().getKey() + newNode.getRightChild().getKey());
+			sortedFreq.add(newNode);
+		}
 
-		return null; //Dummy Return
+
+		return sortedFreq.removeIndex(0); //Dummy Return
+	}
+
+	public static void huffmanHelper(BTNode<Integer,String> root,Map<String, String> result,String prefix) {
+		if (root == null) {
+			return;
+		}
+		if (root.getValue().length() == 1) {
+			result.put(root.getValue(), prefix);
+		}
+		huffmanHelper(root.getLeftChild(),result,prefix + "0");
+		huffmanHelper(root.getRightChild(),result,prefix + "1");
+
 	}
 
 	/**
@@ -134,8 +167,12 @@ public class HuffmanCoding {
 	 */
 	public static Map<String, String> huffman_code(BTNode<Integer,String> huffmanRoot) {
 		/* TODO Construct Prefix Codes */
-		return null; //Dummy Return
+		Map<String, String> result = new HashTableSC<String, String>(new SimpleHashFunction<>());
+		huffmanHelper(huffmanRoot,result,"");
+		return result; //Dummy Return
 	}
+
+
 
 	/**
 	 * TODO ADD DESCRIPTION OF WHAT THIS METHOD DOES HERE
@@ -146,8 +183,12 @@ public class HuffmanCoding {
 	 */
 	public static String encode(Map<String, String> encodingMap, String inputString) {
 		/* TODO Encode String */
-
-		return ""; //Dummy Return
+		String result = "";
+		for (int i = 0;i < inputString.length(); i++) {
+			String temp = inputString.substring(i,i+1);
+			result += encodingMap.get(temp);
+		}
+		return result; //Dummy Return
 	}
 
 	/**

@@ -123,7 +123,7 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 		curNode = head.getNext();
 		E value = null;
 		int counter = 0;
-		while (curNode != null) {
+		while (rmNode != null) {
 			if (index == 0) {
 				value = head.getValue();
 				head = head.getNext();
