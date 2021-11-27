@@ -1,5 +1,5 @@
 # CIIC4020/ICOM4035: Data Structures - Fall 2021-2022
-# ADD YOUR NAME & STUDENT ID HERE
+# Adrian Irizarry Negron - 802-19-8275
 # Project 2 - Huffman Coding
 
 ## To run this project:
