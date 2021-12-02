@@ -91,18 +91,22 @@ public class HuffmanCoding {
 	}
 
 	/**
-	 * TODO ADD DESCRIPTION OF WHAT THIS METHOD DOES HERE
+	 * Receives a string named inputString and returns a map which maps each character to the frequency
+	 * in which they appear.
 	 *
-	 * @param TODO ADD PARAMETER AND DESCRIPTION
-	 * @return TODO ADD RETURN AND DESCRIPTION
+	 * @param inputString name of the string to be processed
+	 * @return Map with the frequency distribution of each character of the inputString
 	 */
 	public static Map<String, Integer> compute_fd(String inputString) {
 		/* TODO Compute Symbol Frequency Distribution of each character inside input string */
 		Map<String, Integer> freq = new HashTableSC<String, Integer>(new SimpleHashFunction<>());
+		/* We iterate through the string to go through each letter and store them in the map (freq). */
 		for (int i = 0; i < inputString.length();i++) {
 			String result = inputString.substring(i,i+1);
+			/* If the character is not already in the map then we add it */
 			if (freq.get(result) == null) {
 				freq.put(result,1);
+			/* If the character is already in the map we add one to the corresponding value  */
 			}else {
 				freq.put(result,freq.get(result) + 1);
 			}
@@ -112,19 +116,24 @@ public class HuffmanCoding {
 	}
 
 	/**
-	 * TODO ADD DESCRIPTION OF WHAT THIS METHOD DOES HERE
+	 * Constructs a huffman tree with the help of a map (fD) which contains the frequency distribution of
+	 * each character and a sorted linked list which helps organize the frequency from min to max. This function then
+	 * takes the characters with the least frequency and adds them up creating a parent node. Like this we create
+	 * a tree from the leafs up to the root of the tree.
 	 *
-	 * @param TODO ADD PARAMETER AND DESCRIPTION
-	 * @return TODO ADD RETURN AND DESCRIPTION
+	 * @param fD Map that contains the amount of times a character appears in a given string.
+	 * @return Root node of the huffman tree
 	 */
 	public static BTNode<Integer, String> huffman_tree(Map<String, Integer> fD) {
-
-		/* TODO Construct Huffman Tree */
+		/* Create a sorted linked list so we can organize each character frequency by order, from least frequent to most frequent */
 		SortedList<BTNode<Integer,String>> sortedFreq = new SortedLinkedList<BTNode<Integer,String>>();
 		for (String key : fD.getKeys()) {
 			BTNode<Integer,String> node = new BTNode<Integer,String>(fD.get(key),key);
 			sortedFreq.add(node);
 		}
+		/* Iterate through the sorted list taking the two least frequent nodes connecting them to a parent which
+		*  will be the sum of the two characters and frequency.
+		*/
 		BTNode<Integer,String> temp = new BTNode<Integer,String>();
 		for (int i = 0; i <= sortedFreq.size()-1; i++) {
 			BTNode<Integer,String> newNode = new BTNode<>();
@@ -134,6 +143,9 @@ public class HuffmanCoding {
 			newNode.setKey(newNode.getLeftChild().getKey() + newNode.getRightChild().getKey());
 			sortedFreq.add(newNode);
 		}
+		/* Iterate through the remaining nodes, taking the two least frequent and connecting them to a parent which
+		*  which will be the sum of these resulting at the end in one node which will be the root of the tree.
+		*/
 		while (sortedFreq.size() != 1) {
 			BTNode<Integer,String> newNode = new BTNode<>();
 			newNode.setLeftChild(sortedFreq.removeIndex(0));
@@ -147,48 +159,66 @@ public class HuffmanCoding {
 		return sortedFreq.removeIndex(0); //Dummy Return
 	}
 
+	/**
+	 * Helper function for huffman_code that will traverse the huffman tree in inorder traversal, each time that it finds
+	 * a character it will save the prefix of the character in a map which key is the character and the value it's prefix.
+	 *
+	 * @param root BTNode that is the root of the previously created huffman tree
+	 * @param result Map that will contain the prefix for each character
+	 * @param prefix String that will contain the code for each character on the tree.
+	 */
 	public static void huffmanHelper(BTNode<Integer,String> root,Map<String, String> result,String prefix) {
 		if (root == null) {
 			return;
 		}
+		/* If the length of the String is 1 it means we found a character, therefore we save the character and its prefix. */
 		if (root.getValue().length() == 1) {
 			result.put(root.getValue(), prefix);
 		}
+		/* The huffman coding algorithm lets us know that each time we go left we add 0 to the prefix, each time we go right we add 1 */
 		huffmanHelper(root.getLeftChild(),result,prefix + "0");
 		huffmanHelper(root.getRightChild(),result,prefix + "1");
 
 	}
 
 	/**
-	 * TODO ADD DESCRIPTION OF WHAT THIS METHOD DOES HERE
+	 * Traverses the given huffman tree with the help of a helper function, huffmanHelper, and returns a map with the character as it's key
+	 * and their corresponding huffman code or prefix.
 	 *
-	 * @param ADD PARAMETER AND DESCRIPTION
-	 * @return ADD RETURN AND DESCRIPTION
+	 * @param huffmanRoot Root of the huffman tree
+	 * @return Map that contains the character as it's key and the prefix as it's value
 	 */
 	public static Map<String, String> huffman_code(BTNode<Integer,String> huffmanRoot) {
-		/* TODO Construct Prefix Codes */
+
 		Map<String, String> result = new HashTableSC<String, String>(new SimpleHashFunction<>());
+		/* Call the helper function that will traverse the tree and store the corresponding huffman code values in the map.
+		*  We pass it the root of the tree, the map and a empty string.
+		*/
 		huffmanHelper(huffmanRoot,result,"");
-		return result; //Dummy Return
+		return result;
 	}
 
 
 
 	/**
-	 * TODO ADD DESCRIPTION OF WHAT THIS METHOD DOES HERE
+	 * Receives the encoding map and inputString and encodes the input string following the huffman coding algorithm.
+	 * This is done with the encodingMap which contains the huffman code for each character.
 	 *
-	 * @param TODO ADD PARAMETER AND DESCRIPTION
-	 * @param TODO ADD PARAMETER AND DESCRIPTION
-	 * @return TODO ADD RETURN AND DESCRIPTION
+	 * @param encodingMap Map that contains the huffman code for each character of the inputString.
+	 * @param inputString String to be encoded.
+	 * @return String that has been encoded following the huffman coding algorithm.
 	 */
 	public static String encode(Map<String, String> encodingMap, String inputString) {
-		/* TODO Encode String */
 		String result = "";
+		/*
+		* Iterate through the inputString so we can look at each character of the string.
+		* For each character we get the corresponding value of the character and we add it to the result string.
+		*/
 		for (int i = 0;i < inputString.length(); i++) {
 			String temp = inputString.substring(i,i+1);
 			result += encodingMap.get(temp);
 		}
-		return result; //Dummy Return
+		return result;
 	}
 
 	/**
