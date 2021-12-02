@@ -139,6 +139,7 @@ public class SortedLinkedList<E extends Comparable<? super E>> extends AbstractS
 			}
 			rmNode = rmNode.getNext();
 			curNode = curNode.getNext();
+			counter++;
 		}
 		return value;
 	}
