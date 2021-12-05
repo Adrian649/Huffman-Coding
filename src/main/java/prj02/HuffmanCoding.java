@@ -98,7 +98,6 @@ public class HuffmanCoding {
 	 * @return Map with the frequency distribution of each character of the inputString
 	 */
 	public static Map<String, Integer> compute_fd(String inputString) {
-		/* TODO Compute Symbol Frequency Distribution of each character inside input string */
 		Map<String, Integer> freq = new HashTableSC<String, Integer>(new SimpleHashFunction<>());
 		/* We iterate through the string to go through each letter and store them in the map (freq). */
 		for (int i = 0; i < inputString.length();i++) {
@@ -112,7 +111,7 @@ public class HuffmanCoding {
 			}
 
 		}
-		return freq; //Dummy Return
+		return freq;
 	}
 
 	/**
@@ -139,6 +138,7 @@ public class HuffmanCoding {
 			BTNode<Integer,String> newNode = new BTNode<>();
 			newNode.setLeftChild(sortedFreq.removeIndex(0));
 			newNode.setRightChild(sortedFreq.removeIndex(0));
+			/* We set the value and key of the parent to the sum of the children node */
 			newNode.setValue(newNode.getLeftChild().getValue() + newNode.getRightChild().getValue());
 			newNode.setKey(newNode.getLeftChild().getKey() + newNode.getRightChild().getKey());
 			sortedFreq.add(newNode);
@@ -156,7 +156,7 @@ public class HuffmanCoding {
 		}
 
 
-		return sortedFreq.removeIndex(0); //Dummy Return
+		return sortedFreq.removeIndex(0); // Returns the root of the tree.
 	}
 
 	/**
